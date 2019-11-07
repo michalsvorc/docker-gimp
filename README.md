@@ -2,10 +2,13 @@
 - based on Alpine Linux
 - docker container executable
 
+## Image tags
+See [list of available tags](https://hub.docker.com/repository/docker/michalsvorc/gimp/tags).
+
 ## Pull
 Docker Hub image
 ```sh
-docker pull michalsvorc/gimp
+docker pull michalsvorc/gimp:<image_tag>
 ```
 
 ## Run
@@ -20,15 +23,9 @@ docker run -it \
     michalsvorc/gimp:<image_tag>
 ```
 
-[List of available image tags](https://hub.docker.com/repository/docker/michalsvorc/gimp/tags)
+### Bind mounts
+- **Workspace**: directory to import/export GIMP work between host machine and docker container.
+- **GIMP profile**: [profile directory](https://www.gimp.org/tutorials/GIMPProfile/) to persist user settings or to import fonts, brushes and plugins.
 
-## Bind mounts
-
-### Workspace
-Directory to import/export GIMP work between host machine and docker container.
-
-### GIMP profile
-[GIMP profile](https://www.gimp.org/tutorials/GIMPProfile/) directory to persist user settings or to import fonts, brushes and plugins.
-
-### run.sh
-Execute `./run.sh` helper script to use default bind volumes under `./mount/` directory (requires [Xhost](https://jlk.fjfi.cvut.cz/arch/manpages/man/xhost.1)).
+## Run helper script
+Execute `./run.sh` helper script to use predefined bind mount paths under projects `./mount/` directory (requires [Xhost](https://jlk.fjfi.cvut.cz/arch/manpages/man/xhost.1)).
