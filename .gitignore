@@ -1,0 +1,5 @@
+.env
+/mount/workspace/*
+!/mount/workspace/.keep
+/mount/profile/*
+!/mount/profile/.keep

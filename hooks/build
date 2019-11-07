@@ -1,0 +1,5 @@
+#!/bin/bash
+# Author: Michal Svorc <michal@svorc.sk>
+# Build docker image
+
+docker build -t $IMAGE_NAME --build-arg gimp_version=$DOCKER_TAG .
