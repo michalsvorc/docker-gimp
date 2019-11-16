@@ -2,11 +2,16 @@
 # Author: Michal Svorc <michal@svorc.sk>
 # Run docker container
 
-# Declare variables
+# Declare base variables
 DOCKER_TAG=2.10
-image_name=michalsvorc/gimp:$DOCKER_TAG
-container_name=michalsvorc-gimp-$DOCKER_TAG
+app_name=gimp
+dockerhub_namespace=michalsvorc
+
+# Interpolate additional variables
+image_name=$dockerhub_namespace/$app_name:$DOCKER_TAG
+container_name=$dockerhub_namespace-$app_name-$DOCKER_TAG
 mount_path="${PWD}/mount"
+user_name=$app_name
 
 # Control appliacation permission to make connections to the X server
 # Requires system xorg-xhost package

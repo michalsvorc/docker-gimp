@@ -1,7 +1,8 @@
 FROM alpine:latest
 
 ARG DOCKER_TAG
-ARG user_name=gimp
+ARG app_name
+ARG user_name=$app_name
 
 RUN apk add --no-cache --update \
     gimp=~${DOCKER_TAG} \
