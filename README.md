@@ -3,13 +3,13 @@
 - executable Docker container
 
 ## Pull
-```sh
+```bash
 docker pull michalsvorc/gimp:<DOCKER_TAG>
 ```
 For list of available DOCKER_TAGs see [Docker Hub repository](https://hub.docker.com/repository/docker/michalsvorc/gimp/tags).
 
 ## Run
-```sh
+```bash
 docker run -it \
     --rm \
     --env DISPLAY=$DISPLAY \
@@ -27,3 +27,10 @@ Optional mount directories to for communication between local machine and Docker
 
 ## Run helper script
 Execute `./run.sh` helper script to use predefined bind mounts (requires [Xhost](https://jlk.fjfi.cvut.cz/arch/manpages/man/xhost.1)).
+
+Provide Docker tag as an optional argument to run specific tagged image. Defaults to most recent tag when not provided.
+
+Example:
+```bash
+./run.sh X.Y
+```

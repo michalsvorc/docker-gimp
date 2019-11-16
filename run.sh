@@ -1,15 +1,19 @@
 #!/bin/bash
 # Author: Michal Svorc <michal@svorc.sk>
 # Run docker container
+# Optional argument: Docker tag to run specific tagged image.
+# Defaults to most recent tag when not provided.
+# Example: ./run.sh X.Y
 
 # Declare base variables
-DOCKER_TAG=2.10
+docker_tag_default=2.10
 app_name=gimp
 dockerhub_namespace=michalsvorc
 
 # Interpolate additional variables
-image_name=$dockerhub_namespace/$app_name:$DOCKER_TAG
-container_name=$dockerhub_namespace-$app_name-$DOCKER_TAG
+docker_tag="${1:-$docker_tag_default}"
+image_name=$dockerhub_namespace/$app_name:$docker_tag
+container_name=$dockerhub_namespace-$app_name-$docker_tag
 mount_path="${PWD}/mount"
 user_name=$app_name
 
@@ -33,7 +37,7 @@ xhost_switch true 'docker' \
     --env DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     --mount type=bind,source=$mount_path/workspace,target=/home/$user_name/workspace \
-    --mount type=bind,source=$mount_path/profile,target=/home/$user_name/.config/GIMP/$DOCKER_TAG \
+    --mount type=bind,source=$mount_path/profile,target=/home/$user_name/.config/GIMP/$docker_tag \
     --name $container_name \
     $image_name \
 ; xhost_switch false 'docker'

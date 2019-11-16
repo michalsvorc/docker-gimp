@@ -11,6 +11,7 @@ RUN apk add --no-cache --update \
     && adduser -D -u 1000 $user_name
 
 USER $user_name
+
 WORKDIR /home/$user_name/workspace
 
 ENTRYPOINT ["/usr/bin/gimp"]
