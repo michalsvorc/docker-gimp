@@ -3,9 +3,9 @@
 # Run docker container
 
 # Declare variables
-gimp_version=2.10
-image_name=michalsvorc/gimp:$gimp_version
-container_name=michalsvorc-gimp-$gimp_version
+DOCKER_TAG=2.10
+image_name=michalsvorc/gimp:$DOCKER_TAG
+container_name=michalsvorc-gimp-$DOCKER_TAG
 mount_path="${PWD}/mount"
 
 # Control appliacation permission to make connections to the X server
@@ -28,7 +28,7 @@ xhost_switch true 'docker' \
     --env DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     --mount type=bind,source=$mount_path/workspace,target=/home/$user_name/workspace \
-    --mount type=bind,source=$mount_path/profile,target=/home/$user_name/.config/GIMP/$gimp_version \
+    --mount type=bind,source=$mount_path/profile,target=/home/$user_name/.config/GIMP/$DOCKER_TAG \
     --name $container_name \
     $image_name \
 ; xhost_switch false 'docker'

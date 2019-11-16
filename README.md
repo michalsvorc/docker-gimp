@@ -26,7 +26,7 @@ docker run -it \
 ### Bind mounts
 Optional mount directories to for communication between local machine and docker container.
 - **workspace**: import local images to GIMP and save your work.
-- **profile**: import fonts, brushes and plugins to [GIMP profile directory](https://www.gimp.org/tutorials/GIMPProfile/). Corresponds to `/home/gimp/.config/GIMP/<gimp_version>` container path.
+- **profile**: import fonts, brushes and plugins to [GIMP profile directory](https://www.gimp.org/tutorials/GIMPProfile/). Corresponds to `/home/gimp/.config/GIMP/<DOCKER_TAG>` container path.
 
 ## Run helper script
 Execute `./run.sh` helper script to use predefined bind mounts (requires [Xhost](https://jlk.fjfi.cvut.cz/arch/manpages/man/xhost.1)).
