@@ -6,7 +6,7 @@
 ```bash
 docker pull michalsvorc/gimp:<DOCKER_TAG>
 ```
-For list of available DOCKER_TAGs see [Docker Hub repository](https://hub.docker.com/repository/docker/michalsvorc/gimp/tags).
+See [Docker Hub repository](https://hub.docker.com/repository/docker/michalsvorc/gimp/tags) for list of all available DOCKER_TAGs.
 
 ## Run
 ```bash
@@ -14,23 +14,29 @@ docker run -it \
     --rm \
     --env DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
-    --mount type=bind,source=<local_workspace>,target=<container_workspace> \
-    --mount type=bind,source=<local_profile>,target=<container_profile> \
+    --mount type=bind,source=<host_workspace-directory>,target=<container_workspace-directory> \
+    --mount type=bind,source=<host_profile-directory>,target=<container_profile-directory> \
     --name michalsvorc-gimp-rm \
     michalsvorc/gimp:<DOCKER_TAG>
 ```
 
-### Bind mounts
-Optional mount directories to for communication between local machine and Docker container.
-- **workspace**: import local files to GIMP and save GIMP outputs.
-- **profile**: import fonts, brushes and plugins to [GIMP profile directory](https://www.gimp.org/tutorials/GIMPProfile/). Corresponds to `/home/gimp/.config/GIMP/<DOCKER_TAG>` container path.
+### Mount directories
+- **workspace**: open host files in GIMP and save GIMP work.
+- **profile**: store fonts, brushes and plugins in shared [GIMP profile directory](https://www.gimp.org/tutorials/GIMPProfile/). Corresponds to `/home/gimp/.config/GIMP/<DOCKER_TAG>` container path.
 
-## Run helper script
-Execute `./run.sh` helper script to use predefined bind mounts (requires [Xhost](https://jlk.fjfi.cvut.cz/arch/manpages/man/xhost.1)).
+### Run helper script
+Execute `./run.sh` helper script to use predefined mount directories (requires [Xhost](https://jlk.fjfi.cvut.cz/arch/manpages/man/xhost.1)).
 
-Provide Docker tag as an optional argument to run specific tagged image. Defaults to most recent tag when not provided.
+Provide Docker tag as an optional argument to run specific version of application. Defaults to the most recent version when not provided.
 
 Example:
 ```bash
 ./run.sh X.Y
 ```
+
+## FAQ
+
+### ERROR: unable to open for writing: [Errno 13] Permission denied
+Mount directories should pre-exist on host system and should be writable by group with `gid=1000`.
+
+Run `chown $(id -u):1000 <directory>` and `chmod g+w -R <directory>` to make directory writable by `gid=1000`.
