@@ -1,26 +1,25 @@
-FROM alpine:latest
+FROM alpine:3
 
 ARG DOCKER_TAG
-ARG app_name
-ARG user_name=${user_name:-$app_name}
-ARG user_id=${user_id:-1000}
-ARG group_name=${group_name:-$user_name}
-ARG group_id=${group_id:-$user_id}
+ARG image_name
+ARG user=${user:-$image_name}
+ARG uid=${uid:-1000}
+ARG group=${group:-$user}
+ARG gid=${gid:-$uid}
 
 RUN apk add --no-cache --update \
-    ghostscript-fonts \
-    dbus-x11 \
-    gimp=~${DOCKER_TAG}
+    gimp=~${DOCKER_TAG} \
+    ttf-freefont \
+    dbus-x11
 
 RUN addgroup \
-    --gid $group_id \
-    $group_name \
+    --gid $gid \
+    $group \
     && adduser \
-    -u $user_id \
+    --uid $uid \
     --disabled-password \
-    --no-create-home \
-    --ingroup $group_name \
-    $user_name
+    --ingroup $group \
+    $user
 
 USER $user_name
 

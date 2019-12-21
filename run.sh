@@ -1,32 +1,25 @@
 #!/bin/bash
-# Author: Michal Svorc <michal@svorc.sk>
+# Author: Michal Svorc <michal@svorc.com>
 # Run docker container
-# Optional argument: Docker tag to run specific tagged image.
-# Defaults to most recent tag when not provided.
-# Example: ./run.sh X.Y
 
 # Declare base variables
-docker_tag_default=2.10
-app_name=gimp
-dockerhub_namespace=michalsvorc
+. ./.config --source-only
 
 # Interpolate additional variables
-docker_tag="${1:-$docker_tag_default}"
-image_name=$dockerhub_namespace/$app_name:$docker_tag
-container_name=$dockerhub_namespace-$app_name-$docker_tag
+image_tag="$image_tag_latest"
+user_name=$image_name
 mount_path="${PWD}/mount"
-user_name=$app_name
 
-# Control appliacation permission to make connections to the X server
+# Control service permission to make connections to the X server
 # Requires system xorg-xhost package
 xhost_switch() {
     local switch_value=$1
-    local application=$2
+    local service=$2
 
     if $switch_value; then
-        xhost +local:$application
+        xhost +local:$service
     else
-        xhost -local:$application
+        xhost -local:$service
     fi
 }
 
@@ -37,7 +30,7 @@ xhost_switch true 'docker' \
     --env DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     --mount type=bind,source=$mount_path/workspace,target=/home/$user_name/workspace \
-    --mount type=bind,source=$mount_path/profile,target=/home/$user_name/.config/GIMP/$docker_tag \
-    --name $container_name \
-    $image_name \
+    --mount type=bind,source=$mount_path/profile,target=/home/$user_name/.config/GIMP/$image_tag \
+    --name $image_repository-$image_name-$image_tag \
+    $image_repository/$image_name:$image_tag \
 ; xhost_switch false 'docker'
