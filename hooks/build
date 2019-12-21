@@ -2,4 +2,4 @@
 # Author: Michal Svorc <michal@svorc.sk>
 # Build Docker image
 
-docker build -t $IMAGE_NAME --build-arg DOCKER_TAG=$DOCKER_TAG --build-arg image_name=gimp .
+docker build -t $IMAGE_NAME --build-arg gimp_version=$(git describe --tags --abbrev=0) .

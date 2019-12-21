@@ -6,7 +6,7 @@
 . ./.config --source-only
 
 # Interpolate additional variables
-image_tag="$image_tag_latest"
+image_tag="$gimp_version"
 user_name=$image_name
 mount_path="${PWD}/mount"
 
@@ -30,7 +30,7 @@ xhost_switch true 'docker' \
     --env DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     --mount type=bind,source=$mount_path/workspace,target=/home/$user_name/workspace \
-    --mount type=bind,source=$mount_path/profile,target=/home/$user_name/.config/GIMP/$image_tag \
-    --name $image_repository-$image_name-$image_tag \
+    --mount type=bind,source=$mount_path/profile,target=/home/$user_name/.config/GIMP/$gimp_version \
+    --name $image_repository-$image_name-$image_tag-rm \
     $image_repository/$image_name:$image_tag \
 ; xhost_switch false 'docker'

@@ -1,14 +1,13 @@
 FROM alpine:3
 
-ARG DOCKER_TAG
-ARG image_name
-ARG user=${user:-$image_name}
-ARG uid=${uid:-1000}
-ARG group=${group:-$user}
-ARG gid=${gid:-$uid}
+ARG gimp_version
+ARG user=gimp
+ARG uid=1000
+ARG group=$user
+ARG gid=$uid
 
 RUN apk add --no-cache --update \
-    gimp=~${DOCKER_TAG} \
+    gimp=~${gimp_version} \
     ttf-freefont \
     dbus-x11
 
