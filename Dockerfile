@@ -20,8 +20,8 @@ RUN addgroup \
     --ingroup $group \
     $user
 
-USER $user_name
+USER $user
 
-WORKDIR /home/$user_name/workspace
+WORKDIR /home/$user/workspace
 
 ENTRYPOINT ["/usr/bin/gimp"]

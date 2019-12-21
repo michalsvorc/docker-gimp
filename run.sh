@@ -6,8 +6,9 @@
 . ./.config --source-only
 
 # Interpolate additional variables
+image_tag=${1:-$gimp_version}
 user_name=$image_name
-mount_path="${PWD}/mount"
+mount_path=${PWD}/mount
 
 # Control service permission to make connections to the X server
 # Requires system xorg-xhost package
