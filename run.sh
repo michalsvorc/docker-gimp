@@ -6,7 +6,6 @@
 . ./.config --source-only
 
 # Interpolate additional variables
-image_tag="$gimp_version"
 user_name=$image_name
 mount_path="${PWD}/mount"
 

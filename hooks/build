@@ -1,5 +1,5 @@
 #!/bin/bash
 # Author: Michal Svorc <michal@svorc.sk>
-# Build Docker image
+# Build Docker image hook
 
 docker build -t $IMAGE_NAME --build-arg gimp_version=$(git describe --tags --abbrev=0) .
