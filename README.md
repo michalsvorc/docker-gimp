@@ -4,7 +4,7 @@
 
 ## Pull
 ```bash
-docker pull michalsvorc/gimp
+docker pull michalsvorc/gimp:<docker_tag>
 ```
 [List of Docker tags](https://hub.docker.com/repository/docker/michalsvorc/gimp/tags)
 
@@ -14,23 +14,18 @@ docker run -it \
     --rm \
     --env DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
-    --mount type=bind,source=<host_workspace-directory>,target=<container_workspace-directory> \
-    --mount type=bind,source=<host_profile-directory>,target=<container_profile-directory> \
-    --name michalsvorc-gimp-rm \
-    michalsvorc/gimp
+    --mount type=bind,source=<host_workspace>,target=<container_workspace> \
+    --mount type=bind,source=<host_profile>,target=<container_profile> \
+    --name michalsvorc-gimp \
+    michalsvorc/gimp:<docker_tag>
 ```
 
 ### Mount directories
-- **workspace**: open host files in GIMP and save GIMP work.
-- **profile**: store fonts, brushes and plugins in shared [GIMP profile directory](https://www.gimp.org/tutorials/GIMPProfile/). Corresponds to `/home/gimp/.config/GIMP/<GIMP_VERSION>` container path.
+- **workspace**: share images between host and containerized GIMP.
+- **profile**: store fonts, brushes and plugins in [GIMP profile directory](https://www.gimp.org/tutorials/GIMPProfile/). Corresponds to `/home/gimp/.config/GIMP/<GIMP_VERSION>` path in container.
 
 ### Run helper script
-Execute `./run.sh` helper script to use predefined mount directories (requires [Xhost](https://jlk.fjfi.cvut.cz/arch/manpages/man/xhost.1)).
-
-Example:
-```bash
-./run.sh
-```
+Execute `./run.sh` helper script to use project repository mount directories (requires [Xhost](https://jlk.fjfi.cvut.cz/arch/manpages/man/xhost.1)).
 
 ## FAQ
 

@@ -2,16 +2,15 @@
 # Author: Michal Svorc <michal@svorc.com>
 # Run docker container
 
-# Declare base variables
-. ./.config --source-only
-
-# Interpolate additional variables
-image_tag=${1:-$gimp_version}
+# Declare variables
+image_repository='michalsvorc'
+image_name='gimp'
+image_tag=$(git describe --tags --abbrev=0)
 user_name=$image_name
-mount_path=${PWD}/mount
+mount_path="${PWD}/mount"
 
 # Control service permission to make connections to the X server
-# Requires system xorg-xhost package
+# Requires system xorg-xhost system package
 xhost_switch() {
     local switch_value=$1
     local service=$2
@@ -30,7 +29,7 @@ xhost_switch true 'docker' \
     --env DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     --mount type=bind,source=$mount_path/workspace,target=/home/$user_name/workspace \
-    --mount type=bind,source=$mount_path/profile,target=/home/$user_name/.config/GIMP/$gimp_version \
-    --name $image_repository-$image_name-$image_tag-rm \
+    --mount type=bind,source=$mount_path/profile,target=/home/$user_name/.config/GIMP/$image_tag \
+    --name $image_repository-$image_name-$image_tag \
     $image_repository/$image_name:$image_tag \
 ; xhost_switch false 'docker'
