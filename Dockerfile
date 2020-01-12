@@ -1,13 +1,13 @@
 FROM alpine:3
 
-ARG gimp_version
+ARG app_version
 ARG user=gimp
 ARG uid=1000
 ARG group=$user
 ARG gid=$uid
 
 RUN apk add --no-cache --update \
-    gimp=~${gimp_version} \
+    gimp=~${app_version} \
     ttf-freefont \
     dbus-x11
 

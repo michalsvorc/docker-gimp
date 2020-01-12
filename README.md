@@ -21,8 +21,8 @@ docker run -it \
 ```
 
 ### Mount directories
-- **workspace**: share images between host and containerized GIMP.
-- **profile**: store fonts, brushes and plugins in [GIMP profile directory](https://www.gimp.org/tutorials/GIMPProfile/). Corresponds to `/home/gimp/.config/GIMP/<GIMP_VERSION>` path in container.
+- **workspace**: share images between host and containerized app
+- **profile**: store fonts, brushes and plugins in [GIMP profile directory](https://www.gimp.org/tutorials/GIMPProfile/), corresponds to `/home/gimp/.config/GIMP/<app_version>` container path
 
 ### Run helper script
 Execute `./run.sh` helper script to use project repository mount directories.

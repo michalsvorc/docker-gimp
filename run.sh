@@ -7,7 +7,7 @@ image_repository='michalsvorc'
 image_name='gimp'
 image_tag=$(git describe --tags --abbrev=0)
 user_name=$image_name
-mount_path="${PWD}/mount"
+mount_path="${PWD}"
 
 # Run
 docker run \

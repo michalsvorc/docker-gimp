@@ -2,4 +2,4 @@
 # Author: Michal Svorc <michalsvorc.com>
 # Build Docker image hook
 
-docker build -t $IMAGE_NAME --build-arg gimp_version=$(git describe --tags --abbrev=0) .
+docker build -t $IMAGE_NAME --build-arg app_version=$(git describe --tags --abbrev=0) .
