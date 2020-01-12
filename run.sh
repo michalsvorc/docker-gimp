@@ -1,6 +1,6 @@
 #!/bin/bash
-# Author: Michal Svorc <michal@svorc.com>
-# Run docker container
+# Author: Michal Svorc <michalsvorc.com>
+# Run docker container with predefined mount directories
 
 # Declare variables
 image_repository='michalsvorc'
@@ -9,27 +9,13 @@ image_tag=$(git describe --tags --abbrev=0)
 user_name=$image_name
 mount_path="${PWD}/mount"
 
-# Control service permission to make connections to the X server
-# Requires system xorg-xhost system package
-xhost_switch() {
-    local switch_value=$1
-    local service=$2
-
-    if $switch_value; then
-        xhost +local:$service
-    else
-        xhost -local:$service
-    fi
-}
-
 # Run
-xhost_switch true 'docker' \
-&& docker run -it \
+docker run \
+    -it \
     --rm \
     --env DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     --mount type=bind,source=$mount_path/workspace,target=/home/$user_name/workspace \
     --mount type=bind,source=$mount_path/profile,target=/home/$user_name/.config/GIMP/$image_tag \
     --name $image_repository-$image_name-$image_tag \
-    $image_repository/$image_name:$image_tag \
-; xhost_switch false 'docker'
+    $image_repository/$image_name:$image_tag

@@ -25,14 +25,14 @@ docker run -it \
 - **profile**: store fonts, brushes and plugins in [GIMP profile directory](https://www.gimp.org/tutorials/GIMPProfile/). Corresponds to `/home/gimp/.config/GIMP/<GIMP_VERSION>` path in container.
 
 ### Run helper script
-Execute `./run.sh` helper script to use project repository mount directories (requires [Xhost](https://jlk.fjfi.cvut.cz/arch/manpages/man/xhost.1)).
+Execute `./run.sh` helper script to use project repository mount directories.
 
 ## FAQ
 
 ### ERROR: unable to open for writing: [Errno 13] Permission denied
 Mount directories should pre-exist on host system and should be writable by group with gid `1000`.
 
-to make directory writable by gid `1000` run:
+Make directory writable by gid `1000`:
 ```bash
 chown -R $(id -u):1000 <directory>
 chmod -R g+w <directory>
