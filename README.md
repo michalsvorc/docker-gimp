@@ -3,12 +3,6 @@
 - executable Docker container
 - persistent application settings
 
-## Pull
-```bash
-docker pull michalsvorc/gimp:<docker_tag>
-```
-[List of Docker tags](https://hub.docker.com/repository/docker/michalsvorc/gimp/tags)
-
 ## Prerequisites
 ### Mount directories
 - **profile**: [GIMP profile](https://www.gimp.org/tutorials/GIMPProfile/) settings directory
@@ -22,4 +16,4 @@ mkdir -p "${PWD}"/profile "${PWD}"/workspace \
 ```
 
 ## Run
-Execute `./run.sh` script.
+Execute `run.sh` script.
