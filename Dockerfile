@@ -1,27 +1,35 @@
 FROM alpine:3
 
+# Build arguments
 ARG app_version
-ARG user=gimp
-ARG uid=1000
-ARG group=$user
-ARG gid=$uid
+ARG user_name=user
+ARG user_id=1000
+ARG group_name=mount
+ARG group_id=1000
 
-RUN apk add --no-cache --update \
-    gimp=~${app_version} \
+# Update package repositories and install packages
+RUN apk add \
+    --no-cache \
+    --update \
+    dbus-x11 \
     ttf-freefont \
-    dbus-x11
+    gimp=~${app_version}
 
+# Create non-system user
 RUN addgroup \
-    --gid $gid \
-    $group \
+    --gid $group_id \
+    $group_name \
     && adduser \
-    --uid $uid \
+    --uid $user_id \
     --disabled-password \
-    --ingroup $group \
-    $user
+    --ingroup $group_name \
+    $user_name
 
-USER $user
+# Use non-system user
+USER $user_name
 
-WORKDIR /home/$user/workspace
+# Change to workspace directory
+WORKDIR /home/$user_name/workspace
 
+# Runtime entrypoint
 ENTRYPOINT ["/usr/bin/gimp"]
