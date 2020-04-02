@@ -13,7 +13,7 @@ RUN apk add \
     --update \
     dbus-x11 \
     ttf-freefont \
-    gimp=~${app_version}
+    gimp=~$app_version
 
 # Create non-system user
 RUN addgroup \
