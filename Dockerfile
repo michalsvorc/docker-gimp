@@ -13,7 +13,8 @@ RUN apk add \
     --update \
     dbus-x11 \
     ttf-freefont \
-    gimp=~$app_version
+    json-c --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main \
+    gimp=~$app_version --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
 
 # Create non-system user
 RUN addgroup \
