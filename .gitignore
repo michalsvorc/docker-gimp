@@ -1,3 +1,4 @@
-.env
-/workspace
-/profile
+/workspace/*
+!/workspace/.keep
+/profile/*
+!/profile/.keep
