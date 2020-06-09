@@ -2,16 +2,17 @@
 
 - based on Alpine Linux
 - executable Docker image
-- persistent application settings
+- persistent application settings in mounted directories
 - edge APK repository
 
-### Mount directories
+## Mount directories
 
 - **profile**: GIMP [profile](https://www.gimp.org/tutorials/GIMPProfile/) directory
 - **workspace**: share files between the host and containerized app
 
 ## Run
-Execute `run.sh` script.
+
+Execute `./docker.sh run`.
 
 ## Troubleshooting
 

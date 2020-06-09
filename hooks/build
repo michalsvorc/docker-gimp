@@ -1,5 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Author: Michal Svorc <michalsvorc.com>
-# Build Docker image hook
+# Description: Build Docker image hook
 
 docker build -t $IMAGE_NAME --build-arg app_version=$(git describe --tags --abbrev=0) .
