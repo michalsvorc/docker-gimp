@@ -5,14 +5,20 @@
 - persistent application settings in mounted directories
 - edge APK repository
 
+## Start
+
+Use `docker.sh` script in project directory.
+
+1. Build Docker image: execute `./docker.sh build`.
+
+2. Run Docker image: execute `./docker.sh run`.
+
+Docker container is not removed after exiting the application. To start the container again, execute `./docker.sh start`.
+
 ## Mount directories
 
 - **profile**: GIMP [profile](https://www.gimp.org/tutorials/GIMPProfile/) directory
 - **workspace**: share files between the host and containerized app
-
-## Run
-
-Execute `./docker.sh run`.
 
 ## Troubleshooting
 
